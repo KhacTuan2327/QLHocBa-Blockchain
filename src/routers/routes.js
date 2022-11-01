@@ -13,15 +13,15 @@ const router = [
     layout:true,
     path: "/about",
   },
-  {
-    component: Login,
-    layout:false,
-    path: "/auth",
-  },
-  {
-    component: ForgotPass,
-    layout:false,
-    path: "/auth/forgot",
-  },
+  // {
+  //   component: Login,
+  //   layout:false,
+  //   path: "/auth",
+  // },
+  // {
+  //   component: ForgotPass,
+  //   layout:false,
+  //   path: "/auth/forgot",
+  // },
 ];
 export default router;

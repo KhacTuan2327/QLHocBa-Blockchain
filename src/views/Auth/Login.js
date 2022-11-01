@@ -1,10 +1,24 @@
 import "./style.css";
 import "antd/dist/antd.min.css";
+import { useState } from "react";
+import {useNavigate} from "react-router"
 import { Link } from "react-router-dom";
 import images from "../../assets/images/login-img1.jpg";
 import { Form, Checkbox, Button, Input } from "antd";
 
+
 const Auth = () => {
+  const navigate = useNavigate()
+  const [user,setUser] = useState({
+    userName:'',
+    pass:''
+  })
+  const onChangeInput = (e,key)=>{
+    setUser({
+      ...user,
+      [key]:e.target.value
+    })
+  }
   const onFinish = values => {
     console.log('Success:', values);
   };
@@ -12,8 +26,10 @@ const Auth = () => {
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
-
-  const handleSubmit = (user, pass) => {
+  const handleSubmit = () => {
+    navigate('/')
+    localStorage.setItem("user",user.userName)
+    
     console.log('Submit successfull')
   }
 
@@ -33,9 +49,12 @@ const Auth = () => {
           <Form.Item
             name="username"
             rules={[{ required: true, message: 'Vui lòng nhập tài khoản!' }]}
+          
           >
             <Input
               placeholder="Tên đăng nhập hoặc Email"
+              value={user.userName}
+              onChange={(e)=>onChangeInput(e,"userName")}
             />
           </Form.Item>
 
@@ -45,6 +64,8 @@ const Auth = () => {
           >
             <Input.Password
               placeholder="Mật khẩu"
+              value={user.pass}
+              onChange={(e)=>onChangeInput(e,"pass")}
             />
           </Form.Item>
 
